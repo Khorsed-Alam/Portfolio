@@ -46,19 +46,14 @@ export const Navbar: React.FC = () => {
           {/* Logo */}
           <a
             href="#hero"
-            className="group flex items-center gap-2 sm:gap-2.5 text-text-white transition-colors shrink-0"
+            className="group flex flex-col text-text-white transition-colors shrink-0"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-surface border border-primary/40 flex items-center justify-center font-display font-bold text-xs sm:text-sm text-primary group-hover:border-primary group-hover:shadow-orange-glow transition-all">
-              KA
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-xs sm:text-sm tracking-wider text-text-white group-hover:text-primary transition-colors">
-                KHORSED ALAM
-              </span>
-              <span className="text-[9px] sm:text-[10px] font-mono text-text-muted tracking-tight">
-                AI & ML Aspirant
-              </span>
-            </div>
+            <span className="font-display font-bold text-xs sm:text-sm tracking-wider text-text-white group-hover:text-primary transition-colors">
+              KHORSED ALAM
+            </span>
+            <span className="text-[9px] sm:text-[10px] font-mono text-text-muted tracking-tight">
+              AI & ML Aspirant
+            </span>
           </a>
 
           {/* Desktop Navigation */}
