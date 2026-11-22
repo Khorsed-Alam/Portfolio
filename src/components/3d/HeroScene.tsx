@@ -51,8 +51,8 @@ export const HeroScene: React.FC = () => {
         <Canvas
           shadows
           camera={{
-            position: [0, 0, isMobile ? 8.2 : 7.2],
-            fov: isMobile ? 50 : 45,
+            position: [0, 0, isMobile ? 7.6 : 7.2],
+            fov: isMobile ? 46 : 45,
           }}
           dpr={[1, isMobile ? 1.25 : 1.75]}
           gl={{
@@ -65,9 +65,9 @@ export const HeroScene: React.FC = () => {
           <SceneLights />
           <FloatingCubes />
           <ContactShadows
-            position={[0, isMobile ? -3.0 : -3.4, 0]}
-            opacity={isLight ? 0.35 : 0.6}
-            scale={isMobile ? 12 : 20}
+            position={[0, isMobile ? -2.8 : -3.4, 0]}
+            opacity={isLight ? 0.35 : 0.55}
+            scale={isMobile ? 10 : 20}
             blur={2.5}
             far={8}
             color={isLight ? "#475569" : "#000000"}

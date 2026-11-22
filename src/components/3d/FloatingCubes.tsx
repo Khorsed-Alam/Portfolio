@@ -26,49 +26,49 @@ export const FloatingCubes: React.FC = () => {
   // Dynamically adapt cube positions so they NEVER get sliced off on mobile phones!
   const cubes: CubeData[] = useMemo(() => {
     if (isMobile) {
-      // Mobile layout: Compact, centered within phone screen bounds (-1.8 to +1.8)
+      // Mobile layout: Symmetrical, centered depth backdrop floating behind full-width content
       return [
-        // Upper focal glowing cube (center-right, fully visible)
+        // Upper center glowing focal cube (placed deeper so it frames the header softly)
         {
-          position: [0.4, 1.4, -1.2],
+          position: [0.1, 1.8, -2.8],
           rotation: [0.4, 0.6, 0.2],
-          scale: [1.15, 1.15, 1.15],
-          speed: 0.8,
-          rotationSpeed: [0.003, 0.005, 0.002],
-          isGlowing: true,
-        },
-        // Upper-left subtle cube
-        {
-          position: [-0.85, 2.2, -2.2],
-          rotation: [0.8, -0.4, 0.3],
-          scale: [0.8, 0.8, 0.8],
-          speed: 0.6,
-          rotationSpeed: [-0.002, 0.004, 0.003],
-        },
-        // Lower-right glowing accent cube
-        {
-          position: [0.7, -1.4, -1.5],
-          rotation: [-0.3, 0.5, 0.8],
           scale: [0.95, 0.95, 0.95],
-          speed: 0.9,
-          rotationSpeed: [0.004, -0.003, 0.002],
+          speed: 0.7,
+          rotationSpeed: [0.003, 0.004, 0.002],
           isGlowing: true,
         },
-        // Lower-left background cube
+        // Upper-left accent cube
         {
-          position: [-0.75, -2.1, -2.4],
-          rotation: [0.2, 0.2, -0.5],
+          position: [-1.1, 0.9, -3.2],
+          rotation: [0.8, -0.4, 0.3],
           scale: [0.75, 0.75, 0.75],
+          speed: 0.5,
+          rotationSpeed: [-0.002, 0.003, 0.002],
+        },
+        // Mid-right subtle glowing accent cube
+        {
+          position: [1.1, -0.2, -3.0],
+          rotation: [-0.3, 0.5, 0.8],
+          scale: [0.8, 0.8, 0.8],
+          speed: 0.8,
+          rotationSpeed: [0.003, -0.003, 0.002],
+          isGlowing: true,
+        },
+        // Lower-center background cube
+        {
+          position: [-0.3, -1.7, -3.5],
+          rotation: [0.2, 0.2, -0.5],
+          scale: [0.7, 0.7, 0.7],
           speed: 0.5,
           rotationSpeed: [0.002, 0.002, -0.003],
         },
-        // Mid-depth center background cube
+        // Deep background accent
         {
-          position: [0.1, -0.2, -3.2],
+          position: [0.7, 2.4, -4.5],
           rotation: [-0.5, 0.8, 0.1],
-          scale: [0.7, 0.7, 0.7],
-          speed: 0.7,
-          rotationSpeed: [-0.003, 0.003, 0.001],
+          scale: [0.6, 0.6, 0.6],
+          speed: 0.6,
+          rotationSpeed: [-0.002, 0.002, 0.001],
         },
       ];
     }
