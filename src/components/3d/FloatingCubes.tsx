@@ -23,48 +23,40 @@ export const FloatingCubes: React.FC = () => {
   const groupRef = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
-  // Dynamically adapt cube positions for a balanced, full-screen ambient 3D experience
+  // All 3D square boxes strictly aligned in the RIGHT SIDE of the page
   const cubes: CubeData[] = useMemo(() => {
     if (isMobile) {
-      // Mobile layout: Symmetrical, centered depth backdrop floating behind full-width content
+      // Mobile layout: Soft ambient cubes arranged on the right side of the canvas
       return [
-        // Upper center glowing focal cube (frames the title gently from behind)
+        // Upper-right glowing accent
         {
-          position: [0, 2.2, -3.5],
+          position: [1.3, 1.8, -2.8],
           rotation: [0.4, 0.6, 0.2],
           scale: [0.9, 0.9, 0.9],
           speed: 0.7,
           rotationSpeed: [0.003, 0.004, 0.002],
           isGlowing: true,
         },
-        // Left flank ambient cube
+        // Mid-right subtle accent
         {
-          position: [-1.35, 0.8, -3.2],
+          position: [1.5, -0.3, -2.6],
           rotation: [0.8, -0.4, 0.3],
-          scale: [0.8, 0.8, 0.8],
+          scale: [0.85, 0.85, 0.85],
           speed: 0.5,
           rotationSpeed: [-0.002, 0.003, 0.002],
         },
-        // Right flank glowing accent cube
+        // Lower-right glowing cube
         {
-          position: [1.35, -0.6, -3.0],
+          position: [1.2, -1.8, -3.0],
           rotation: [-0.3, 0.5, 0.8],
-          scale: [0.85, 0.85, 0.85],
+          scale: [0.8, 0.8, 0.8],
           speed: 0.8,
           rotationSpeed: [0.003, -0.003, 0.002],
           isGlowing: true,
         },
-        // Lower center background cube
+        // Deep background right cube
         {
-          position: [-0.2, -2.0, -3.6],
-          rotation: [0.2, 0.2, -0.5],
-          scale: [0.75, 0.75, 0.75],
-          speed: 0.5,
-          rotationSpeed: [0.002, 0.002, -0.003],
-        },
-        // Deep background ambient
-        {
-          position: [0.8, 2.4, -4.5],
+          position: [1.7, 2.5, -4.2],
           rotation: [-0.5, 0.8, 0.1],
           scale: [0.65, 0.65, 0.65],
           speed: 0.6,
@@ -73,78 +65,79 @@ export const FloatingCubes: React.FC = () => {
       ];
     }
 
-    // Desktop layout: Beautiful symmetrical flanking arrangement framing the centered hero
+    // Desktop layout: ALL square 3D boxes aligned on the RIGHT SIDE of the page
     return [
-      // Right Flank - Primary glowing hero cube
+      // 1. Primary Hero Glowing Cube (Right Center)
       {
-        position: [3.3, 0.5, 0.0],
+        position: [2.8, 0.2, 0.3],
         rotation: [0.4, 0.6, 0.2],
-        scale: [1.6, 1.6, 1.6],
+        scale: [1.8, 1.8, 1.8],
         speed: 0.8,
         rotationSpeed: [0.003, 0.004, 0.002],
         isGlowing: true,
       },
-      // Left Flank - Corresponding metallic cube
+      // 2. Upper Right Metallic Accent Cube
       {
-        position: [-3.3, 0.5, 0.0],
-        rotation: [-0.4, -0.5, 0.3],
-        scale: [1.6, 1.6, 1.6],
-        speed: 0.7,
-        rotationSpeed: [-0.003, 0.004, 0.002],
-        isGlowing: true,
-      },
-      // Right Flank - Upper accent cube
-      {
-        position: [2.6, 2.2, -1.0],
+        position: [1.8, 2.2, -0.6],
         rotation: [0.8, -0.4, 0.3],
-        scale: [1.1, 1.1, 1.1],
+        scale: [1.2, 1.2, 1.2],
         speed: 0.6,
         rotationSpeed: [-0.002, 0.003, 0.003],
       },
-      // Left Flank - Upper accent cube
+      // 3. Lower Right Glowing Accent Cube
       {
-        position: [-2.6, 2.2, -1.0],
-        rotation: [-0.6, 0.4, -0.2],
-        scale: [1.1, 1.1, 1.1],
-        speed: 0.6,
-        rotationSpeed: [0.002, 0.003, -0.002],
-      },
-      // Right Flank - Lower accent cube
-      {
-        position: [3.6, -1.8, -0.8],
+        position: [3.6, -1.6, -0.4],
         rotation: [-0.3, 0.5, 0.8],
-        scale: [1.15, 1.15, 1.15],
+        scale: [1.25, 1.25, 1.25],
         speed: 0.9,
         rotationSpeed: [0.003, -0.003, 0.002],
         isGlowing: true,
       },
-      // Left Flank - Lower accent cube
+      // 4. Far Right Upper Cube
       {
-        position: [-3.6, -1.8, -0.8],
-        rotation: [0.3, -0.5, 0.6],
-        scale: [1.15, 1.15, 1.15],
-        speed: 0.8,
-        rotationSpeed: [-0.003, 0.002, 0.002],
+        position: [4.4, 1.8, -1.8],
+        rotation: [-0.6, 0.5, -0.2],
+        scale: [1.0, 1.0, 1.0],
+        speed: 0.5,
+        rotationSpeed: [0.002, 0.002, -0.002],
       },
-      // Deep Background center floating cube
+      // 5. Far Right Mid Cube
       {
-        position: [0, 2.8, -3.5],
+        position: [4.6, -0.2, -2.2],
+        rotation: [0.3, -0.6, 0.5],
+        scale: [0.9, 0.9, 0.9],
+        speed: 0.4,
+        rotationSpeed: [-0.002, 0.003, -0.001],
+      },
+      // 6. Lower Inner Right Accent Cube
+      {
+        position: [1.8, -2.2, -1.2],
+        rotation: [0.2, 0.3, -0.4],
+        scale: [0.95, 0.95, 0.95],
+        speed: 0.7,
+        rotationSpeed: [0.002, -0.002, 0.003],
+      },
+      // 7. Deep Background Right Glowing Cube
+      {
+        position: [3.3, 3.0, -3.2],
         rotation: [-0.5, 0.8, 0.1],
-        scale: [0.85, 0.85, 0.85],
+        scale: [0.8, 0.8, 0.8],
         speed: 0.5,
         rotationSpeed: [-0.002, 0.002, 0.001],
+        isGlowing: true,
       },
     ];
   }, [isMobile]);
 
-  // Floating warm ember particles spread symmetrically across viewport
+  // Floating warm ember particles adapted to right-side cluster
   const particles = useMemo(() => {
-    const count = isMobile ? 35 : 55;
+    const count = isMobile ? 30 : 50;
     const pos = new Float32Array(count * 3);
-    const spreadX = isMobile ? 5.0 : 12.0;
+    const spreadX = isMobile ? 4.5 : 8.5;
+    const offsetX = isMobile ? 0.8 : 2.6;
 
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * spreadX;
+      pos[i * 3] = (Math.random() - 0.5) * spreadX + offsetX;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 6 - 0.5;
     }

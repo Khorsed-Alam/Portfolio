@@ -29,8 +29,8 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-12 flex flex-col items-center text-center">
-        <div className="w-full flex flex-col items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-12 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div className="w-full lg:max-w-xl xl:max-w-2xl flex flex-col items-center lg:items-start">
           {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -44,12 +44,12 @@ export const HeroSection: React.FC = () => {
             </span>
           </motion.div>
 
-          {/* Main Title - Large bold high-contrast typography centered across screen */}
+          {/* Main Title - Large bold high-contrast typography */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-slate-900 dark:text-text-white font-display uppercase leading-[1.08] text-center w-full"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-slate-900 dark:text-text-white font-display uppercase leading-[1.08] text-center lg:text-left w-full"
           >
             <span className="inline mr-3 sm:mr-5">KHORSED</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-primary to-orange-500 dark:from-text-white dark:via-text-white dark:to-primary">
@@ -62,7 +62,7 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-4 sm:mt-6 flex flex-wrap items-center justify-center gap-x-2.5 sm:gap-x-4 gap-y-1.5 text-xs sm:text-base font-mono w-full"
+            className="mt-4 sm:mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 sm:gap-x-4 gap-y-1.5 text-xs sm:text-base font-mono w-full"
           >
             <span className="text-slate-900 dark:text-text-white font-semibold flex items-center gap-1.5">
               <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
@@ -83,17 +83,17 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-4 sm:mt-6 text-sm sm:text-lg text-slate-700 dark:text-text-muted w-full max-w-2xl mx-auto leading-relaxed font-sans font-normal"
+            className="mt-4 sm:mt-6 text-sm sm:text-lg text-slate-700 dark:text-text-muted w-full max-w-2xl lg:max-w-xl leading-relaxed font-sans font-normal text-center lg:text-left"
           >
             &ldquo;{personalData.bio}&rdquo;
           </motion.p>
 
-          {/* Action CTAs - Centered responsive action buttons spanning screen */}
+          {/* Action CTAs - Responsive action buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-6 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full"
+            className="mt-6 sm:mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full"
           >
             <Button
               href="#projects"
@@ -124,14 +124,14 @@ export const HeroSection: React.FC = () => {
             </Button>
           </motion.div>
 
-          {/* Key Facts Pills - Full-width 3-column row spanning symmetrically */}
+          {/* Key Facts Pills - 3-column row */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-8 sm:mt-14 grid grid-cols-3 gap-2 sm:gap-4 w-full max-w-xl mx-auto pt-6 border-t border-surface-light/80"
+            className="mt-8 sm:mt-14 grid grid-cols-3 gap-2 sm:gap-4 w-full max-w-xl pt-6 border-t border-surface-light/80"
           >
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-surface/90 border border-surface-light shadow-sm text-center">
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-surface/90 border border-surface-light shadow-sm text-center lg:text-left">
               <span className="block text-[10px] sm:text-xs font-mono text-slate-500 dark:text-text-muted font-medium truncate">
                 Target Role
               </span>
@@ -139,7 +139,7 @@ export const HeroSection: React.FC = () => {
                 AI / ML Eng.
               </span>
             </div>
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-surface/90 border border-surface-light shadow-sm text-center">
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-surface/90 border border-surface-light shadow-sm text-center lg:text-left">
               <span className="block text-[10px] sm:text-xs font-mono text-slate-500 dark:text-text-muted font-medium truncate">
                 Academic Term
               </span>
@@ -147,7 +147,7 @@ export const HeroSection: React.FC = () => {
                 10th Sem.
               </span>
             </div>
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-surface/90 border border-surface-light shadow-sm text-center">
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-surface/90 border border-surface-light shadow-sm text-center lg:text-left">
               <span className="block text-[10px] sm:text-xs font-mono text-slate-500 dark:text-text-muted font-medium truncate">
                 Location
               </span>

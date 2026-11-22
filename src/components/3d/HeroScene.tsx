@@ -41,8 +41,8 @@ export const HeroScene: React.FC = () => {
       <div
         className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
           isLight
-            ? "bg-[radial-gradient(circle_at_50%_35%,rgba(255,138,50,0.16)_0%,rgba(255,180,92,0.05)_45%,transparent_70%)]"
-            : "bg-[radial-gradient(circle_at_50%_35%,rgba(255,138,50,0.12)_0%,rgba(24,33,43,0.5)_50%,#111923_90%)]"
+            ? "bg-[radial-gradient(circle_at_65%_40%,rgba(255,138,50,0.18)_0%,rgba(255,180,92,0.05)_45%,transparent_70%)]"
+            : "bg-[radial-gradient(circle_at_65%_40%,rgba(255,138,50,0.14)_0%,rgba(24,33,43,0.5)_50%,#111923_90%)]"
         }`}
       />
 
@@ -65,9 +65,9 @@ export const HeroScene: React.FC = () => {
           <SceneLights />
           <FloatingCubes />
           <ContactShadows
-            position={[0, isMobile ? -2.8 : -3.4, 0]}
+            position={[isMobile ? 0 : 2.6, isMobile ? -2.8 : -3.4, 0]}
             opacity={isLight ? 0.35 : 0.55}
-            scale={isMobile ? 10 : 20}
+            scale={isMobile ? 10 : 16}
             blur={2.5}
             far={8}
             color={isLight ? "#475569" : "#000000"}
