@@ -10,7 +10,7 @@ import { Milestone, Flag, Compass, Sparkles, ChevronRight } from "lucide-react";
 
 export const JourneySection: React.FC = () => {
   return (
-    <section id="journey" className="py-24 sm:py-32 relative bg-background">
+    <section id="journey" className="py-24 sm:py-32 relative bg-background overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           category="Milestones"

@@ -25,7 +25,7 @@ export const SkillsSection: React.FC = () => {
       : skillCategories.filter((cat) => cat.category === activeCategory);
 
   return (
-    <section id="skills" className="py-24 sm:py-32 relative bg-background">
+    <section id="skills" className="py-24 sm:py-32 relative bg-background overflow-hidden w-full max-w-full">
       {/* Background radial accent */}
       <div className="absolute top-1/3 right-0 w-80 h-80 bg-amber/5 rounded-full blur-3xl pointer-events-none" />
 

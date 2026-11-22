@@ -18,7 +18,7 @@ import {
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-24 sm:py-32 relative bg-background">
+    <section id="about" className="py-24 sm:py-32 relative bg-background overflow-hidden w-full max-w-full">
       {/* Subtle background ambient glow */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 

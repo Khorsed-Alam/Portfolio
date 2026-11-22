@@ -41,12 +41,12 @@ export const Navbar: React.FC = () => {
           : "bg-transparent py-3.5 sm:py-5"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
+        <div className="flex items-center justify-between w-full">
           {/* Logo */}
           <a
             href="#hero"
-            className="group flex items-center gap-2 sm:gap-2.5 text-text-white transition-colors"
+            className="group flex items-center gap-2 sm:gap-2.5 text-text-white transition-colors shrink-0"
           >
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-surface border border-primary/40 flex items-center justify-center font-display font-bold text-xs sm:text-sm text-primary group-hover:border-primary group-hover:shadow-orange-glow transition-all">
               KA
@@ -86,8 +86,8 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Desktop Actions - strictly matched with desktop navigation breakpoint (hidden below lg) */}
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
             <div className="flex items-center gap-1.5 pr-2 border-r border-surface-light/60">
               <a
                 href={personalData.github}
@@ -130,20 +130,20 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile menu toggle & theme toggle */}
-          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
+          {/* Mobile menu toggle & theme toggle - always fully visible on all mobile screens */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
             <ThemeToggle className="p-1.5" />
             <a
               href="/resume.pdf"
               download="Khorsed_Alam_Resume.pdf"
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-primary text-[11px] font-mono"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-primary/10 border border-primary/30 text-primary hover:bg-primary hover:text-white text-xs font-mono font-medium transition-colors"
             >
-              <Download className="w-3 h-3" />
+              <Download className="w-3.5 h-3.5" />
               <span>CV</span>
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 rounded-lg text-text-muted hover:text-text-white bg-surface border border-surface-light/80"
+              className="p-1.5 rounded-lg text-text-muted hover:text-text-white bg-surface border border-surface-light/80 hover:border-primary/40 transition-colors"
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

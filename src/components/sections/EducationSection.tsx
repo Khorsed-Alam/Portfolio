@@ -26,7 +26,7 @@ const levelIcons = {
 
 export const EducationSection: React.FC = () => {
   return (
-    <section id="education" className="py-24 sm:py-32 relative bg-background">
+    <section id="education" className="py-24 sm:py-32 relative bg-background overflow-hidden w-full max-w-full">
       {/* Ambient background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 

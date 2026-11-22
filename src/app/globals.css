@@ -27,6 +27,8 @@
     scroll-behavior: smooth;
     color-scheme: dark;
     transition: background-color 0.3s ease, color 0.3s ease;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   html.light {
@@ -36,7 +38,9 @@
   body {
     background-color: rgb(var(--background));
     color: rgb(var(--text-white));
+    max-width: 100vw;
     overflow-x: hidden;
+    position: relative;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     transition: background-color 0.3s ease, color 0.3s ease;
   }

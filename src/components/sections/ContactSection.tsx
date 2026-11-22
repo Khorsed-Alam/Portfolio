@@ -68,7 +68,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 relative bg-background/50 border-t border-surface-light/40">
+    <section id="contact" className="py-24 sm:py-32 relative bg-background/50 border-t border-surface-light/40 overflow-hidden w-full max-w-full">
       {/* Background subtle glow */}
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 

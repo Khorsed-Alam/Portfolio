@@ -23,122 +23,128 @@ export const FloatingCubes: React.FC = () => {
   const groupRef = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
-  // Dynamically adapt cube positions so they NEVER get sliced off on mobile phones!
+  // Dynamically adapt cube positions for a balanced, full-screen ambient 3D experience
   const cubes: CubeData[] = useMemo(() => {
     if (isMobile) {
       // Mobile layout: Symmetrical, centered depth backdrop floating behind full-width content
       return [
-        // Upper center glowing focal cube (placed deeper so it frames the header softly)
+        // Upper center glowing focal cube (frames the title gently from behind)
         {
-          position: [0.1, 1.8, -2.8],
+          position: [0, 2.2, -3.5],
           rotation: [0.4, 0.6, 0.2],
-          scale: [0.95, 0.95, 0.95],
+          scale: [0.9, 0.9, 0.9],
           speed: 0.7,
           rotationSpeed: [0.003, 0.004, 0.002],
           isGlowing: true,
         },
-        // Upper-left accent cube
+        // Left flank ambient cube
         {
-          position: [-1.1, 0.9, -3.2],
+          position: [-1.35, 0.8, -3.2],
           rotation: [0.8, -0.4, 0.3],
-          scale: [0.75, 0.75, 0.75],
+          scale: [0.8, 0.8, 0.8],
           speed: 0.5,
           rotationSpeed: [-0.002, 0.003, 0.002],
         },
-        // Mid-right subtle glowing accent cube
+        // Right flank glowing accent cube
         {
-          position: [1.1, -0.2, -3.0],
+          position: [1.35, -0.6, -3.0],
           rotation: [-0.3, 0.5, 0.8],
-          scale: [0.8, 0.8, 0.8],
+          scale: [0.85, 0.85, 0.85],
           speed: 0.8,
           rotationSpeed: [0.003, -0.003, 0.002],
           isGlowing: true,
         },
-        // Lower-center background cube
+        // Lower center background cube
         {
-          position: [-0.3, -1.7, -3.5],
+          position: [-0.2, -2.0, -3.6],
           rotation: [0.2, 0.2, -0.5],
-          scale: [0.7, 0.7, 0.7],
+          scale: [0.75, 0.75, 0.75],
           speed: 0.5,
           rotationSpeed: [0.002, 0.002, -0.003],
         },
-        // Deep background accent
+        // Deep background ambient
         {
-          position: [0.7, 2.4, -4.5],
+          position: [0.8, 2.4, -4.5],
           rotation: [-0.5, 0.8, 0.1],
-          scale: [0.6, 0.6, 0.6],
+          scale: [0.65, 0.65, 0.65],
           speed: 0.6,
           rotationSpeed: [-0.002, 0.002, 0.001],
         },
       ];
     }
 
-    // Desktop layout: Spacious arrangement in the right half of the screen
+    // Desktop layout: Beautiful symmetrical flanking arrangement framing the centered hero
     return [
+      // Right Flank - Primary glowing hero cube
       {
-        position: [2.5, 0.2, 0.2],
+        position: [3.3, 0.5, 0.0],
         rotation: [0.4, 0.6, 0.2],
-        scale: [1.85, 1.85, 1.85],
+        scale: [1.6, 1.6, 1.6],
         speed: 0.8,
-        rotationSpeed: [0.003, 0.005, 0.002],
+        rotationSpeed: [0.003, 0.004, 0.002],
         isGlowing: true,
       },
+      // Left Flank - Corresponding metallic cube
       {
-        position: [1.3, 2.0, -0.5],
-        rotation: [0.8, -0.4, 0.3],
-        scale: [1.15, 1.15, 1.15],
-        speed: 0.6,
-        rotationSpeed: [-0.002, 0.004, 0.003],
-      },
-      {
-        position: [3.5, -1.5, -0.3],
-        rotation: [-0.3, 0.5, 0.8],
-        scale: [1.25, 1.25, 1.25],
-        speed: 0.9,
-        rotationSpeed: [0.004, -0.003, 0.002],
-        isGlowing: true,
-      },
-      {
-        position: [1.9, -2.2, -1.2],
-        rotation: [0.2, 0.2, -0.5],
-        scale: [1.0, 1.0, 1.0],
-        speed: 0.5,
-        rotationSpeed: [0.002, 0.002, -0.003],
-      },
-      {
-        position: [3.8, 1.9, -1.5],
-        rotation: [-0.5, 0.8, 0.1],
-        scale: [0.95, 0.95, 0.95],
+        position: [-3.3, 0.5, 0.0],
+        rotation: [-0.4, -0.5, 0.3],
+        scale: [1.6, 1.6, 1.6],
         speed: 0.7,
-        rotationSpeed: [-0.003, 0.003, 0.001],
-      },
-      {
-        position: [4.4, 0.4, -2.5],
-        rotation: [0.6, -0.7, 0.3],
-        scale: [0.85, 0.85, 0.85],
-        speed: 0.4,
-        rotationSpeed: [0.001, 0.003, -0.002],
-      },
-      {
-        position: [-3.8, 2.6, -4.5],
-        rotation: [-0.3, 0.6, -0.4],
-        scale: [0.6, 0.6, 0.6],
-        speed: 0.3,
-        rotationSpeed: [-0.002, 0.002, 0.002],
+        rotationSpeed: [-0.003, 0.004, 0.002],
         isGlowing: true,
+      },
+      // Right Flank - Upper accent cube
+      {
+        position: [2.6, 2.2, -1.0],
+        rotation: [0.8, -0.4, 0.3],
+        scale: [1.1, 1.1, 1.1],
+        speed: 0.6,
+        rotationSpeed: [-0.002, 0.003, 0.003],
+      },
+      // Left Flank - Upper accent cube
+      {
+        position: [-2.6, 2.2, -1.0],
+        rotation: [-0.6, 0.4, -0.2],
+        scale: [1.1, 1.1, 1.1],
+        speed: 0.6,
+        rotationSpeed: [0.002, 0.003, -0.002],
+      },
+      // Right Flank - Lower accent cube
+      {
+        position: [3.6, -1.8, -0.8],
+        rotation: [-0.3, 0.5, 0.8],
+        scale: [1.15, 1.15, 1.15],
+        speed: 0.9,
+        rotationSpeed: [0.003, -0.003, 0.002],
+        isGlowing: true,
+      },
+      // Left Flank - Lower accent cube
+      {
+        position: [-3.6, -1.8, -0.8],
+        rotation: [0.3, -0.5, 0.6],
+        scale: [1.15, 1.15, 1.15],
+        speed: 0.8,
+        rotationSpeed: [-0.003, 0.002, 0.002],
+      },
+      // Deep Background center floating cube
+      {
+        position: [0, 2.8, -3.5],
+        rotation: [-0.5, 0.8, 0.1],
+        scale: [0.85, 0.85, 0.85],
+        speed: 0.5,
+        rotationSpeed: [-0.002, 0.002, 0.001],
       },
     ];
   }, [isMobile]);
 
-  // Floating warm ember particles adapted to screen width
+  // Floating warm ember particles spread symmetrically across viewport
   const particles = useMemo(() => {
-    const count = isMobile ? 25 : 40;
+    const count = isMobile ? 35 : 55;
     const pos = new Float32Array(count * 3);
-    const spreadX = isMobile ? 3.5 : 9.0;
-    const offsetX = isMobile ? 0 : 2.0;
+    const spreadX = isMobile ? 5.0 : 12.0;
 
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * spreadX + offsetX;
+      pos[i * 3] = (Math.random() - 0.5) * spreadX;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 6 - 0.5;
     }

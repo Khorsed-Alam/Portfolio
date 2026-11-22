@@ -18,7 +18,7 @@ const projectIcons: Record<string, React.ReactNode> = {
 
 export const ProjectsSection: React.FC = () => {
   return (
-    <section id="projects" className="py-24 sm:py-32 relative bg-background/50 border-y border-surface-light/40">
+    <section id="projects" className="py-24 sm:py-32 relative bg-background/50 border-y border-surface-light/40 overflow-hidden w-full max-w-full">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 

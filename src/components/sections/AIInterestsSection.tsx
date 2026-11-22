@@ -17,7 +17,7 @@ const topicIcons: Record<number, React.ReactNode> = {
 
 export const AIInterestsSection: React.FC = () => {
   return (
-    <section id="ai-interests" className="py-24 sm:py-32 relative bg-background/50 border-y border-surface-light/40">
+    <section id="ai-interests" className="py-24 sm:py-32 relative bg-background/50 border-y border-surface-light/40 overflow-hidden w-full max-w-full">
       {/* Background glow circle */}
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
