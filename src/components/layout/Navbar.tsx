@@ -37,8 +37,8 @@ export const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-surface-light/60 py-3 shadow-lg"
-          : "bg-transparent py-5"
+          ? "bg-background/90 backdrop-blur-md border-b border-surface-light/60 py-2.5 sm:py-3 shadow-lg"
+          : "bg-transparent py-3.5 sm:py-5"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,16 +46,16 @@ export const Navbar: React.FC = () => {
           {/* Logo */}
           <a
             href="#hero"
-            className="group flex items-center gap-2.5 text-text-white transition-colors"
+            className="group flex items-center gap-2 sm:gap-2.5 text-text-white transition-colors"
           >
-            <div className="w-8 h-8 rounded-lg bg-surface border border-primary/40 flex items-center justify-center font-display font-bold text-sm text-primary group-hover:border-primary group-hover:shadow-orange-glow transition-all">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-surface border border-primary/40 flex items-center justify-center font-display font-bold text-xs sm:text-sm text-primary group-hover:border-primary group-hover:shadow-orange-glow transition-all">
               KA
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-sm tracking-wider text-text-white group-hover:text-primary transition-colors">
+              <span className="font-display font-bold text-xs sm:text-sm tracking-wider text-text-white group-hover:text-primary transition-colors">
                 KHORSED ALAM
               </span>
-              <span className="text-[10px] font-mono text-text-muted tracking-tight">
+              <span className="text-[9px] sm:text-[10px] font-mono text-text-muted tracking-tight">
                 AI & ML Aspirant
               </span>
             </div>
@@ -86,7 +86,7 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Actions: Social Icons, Theme Toggle & CV */}
+          {/* Desktop Actions */}
           <div className="hidden sm:flex items-center gap-3">
             <div className="flex items-center gap-1.5 pr-2 border-r border-surface-light/60">
               <a
@@ -131,19 +131,19 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile menu toggle & theme toggle */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <ThemeToggle />
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
+            <ThemeToggle className="p-1.5" />
             <a
               href="/resume.pdf"
               download="Khorsed_Alam_Resume.pdf"
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-primary text-xs font-mono"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-primary text-[11px] font-mono"
             >
               <Download className="w-3 h-3" />
               <span>CV</span>
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-text-muted hover:text-text-white bg-surface border border-surface-light/80"
+              className="p-1.5 rounded-lg text-text-muted hover:text-text-white bg-surface border border-surface-light/80"
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -154,7 +154,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[60px] bg-background/98 backdrop-blur-xl border-b border-surface-light p-6 shadow-2xl transition-all">
+        <div className="lg:hidden fixed inset-x-0 top-[54px] sm:top-[60px] bg-background/98 backdrop-blur-xl border-b border-surface-light p-6 shadow-2xl transition-all">
           <nav className="flex flex-col space-y-3">
             {navItems.map((item) => (
               <a

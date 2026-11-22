@@ -37,12 +37,12 @@ export const HeroScene: React.FC = () => {
 
   return (
     <div className="w-full h-full relative overflow-hidden">
-      {/* Background radial glow placed BEHIND canvas so it never washes out the 3D objects */}
+      {/* Background radial glow placed BEHIND canvas */}
       <div
         className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
           isLight
-            ? "bg-[radial-gradient(circle_at_65%_35%,rgba(255,138,50,0.18)_0%,rgba(255,180,92,0.06)_45%,transparent_70%)]"
-            : "bg-[radial-gradient(circle_at_65%_35%,rgba(255,138,50,0.14)_0%,rgba(24,33,43,0.5)_50%,#111923_90%)]"
+            ? "bg-[radial-gradient(circle_at_50%_35%,rgba(255,138,50,0.16)_0%,rgba(255,180,92,0.05)_45%,transparent_70%)]"
+            : "bg-[radial-gradient(circle_at_50%_35%,rgba(255,138,50,0.12)_0%,rgba(24,33,43,0.5)_50%,#111923_90%)]"
         }`}
       />
 
@@ -51,8 +51,8 @@ export const HeroScene: React.FC = () => {
         <Canvas
           shadows
           camera={{
-            position: [0, 0, isMobile ? 8.5 : 7.2],
-            fov: isMobile ? 55 : 45,
+            position: [0, 0, isMobile ? 8.2 : 7.2],
+            fov: isMobile ? 50 : 45,
           }}
           dpr={[1, isMobile ? 1.25 : 1.75]}
           gl={{
@@ -65,9 +65,9 @@ export const HeroScene: React.FC = () => {
           <SceneLights />
           <FloatingCubes />
           <ContactShadows
-            position={[0, -3.4, 0]}
+            position={[0, isMobile ? -3.0 : -3.4, 0]}
             opacity={isLight ? 0.35 : 0.6}
-            scale={20}
+            scale={isMobile ? 12 : 20}
             blur={2.5}
             far={8}
             color={isLight ? "#475569" : "#000000"}
@@ -75,8 +75,8 @@ export const HeroScene: React.FC = () => {
         </Canvas>
       </Suspense>
 
-      {/* Subtle bottom fade only so content flows into next section without covering the 3D model */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20" />
+      {/* Subtle bottom fade for seamless transition */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-background to-transparent z-20" />
     </div>
   );
 };

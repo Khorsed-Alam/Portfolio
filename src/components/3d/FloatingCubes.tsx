@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useMemo } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -12,53 +12,99 @@ interface CubeData {
   speed: number;
   rotationSpeed: [number, number, number];
   isGlowing?: boolean;
-  accentColor?: string;
 }
 
 export const FloatingCubes: React.FC = () => {
   const { theme } = useTheme();
   const isLight = theme === "light";
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 5.8;
+
   const groupRef = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
-  // Cubes positioned on the RIGHT half of the viewport to keep text on the left 100% unobstructed!
+  // Dynamically adapt cube positions so they NEVER get sliced off on mobile phones!
   const cubes: CubeData[] = useMemo(() => {
+    if (isMobile) {
+      // Mobile layout: Compact, centered within phone screen bounds (-1.8 to +1.8)
+      return [
+        // Upper focal glowing cube (center-right, fully visible)
+        {
+          position: [0.4, 1.4, -1.2],
+          rotation: [0.4, 0.6, 0.2],
+          scale: [1.15, 1.15, 1.15],
+          speed: 0.8,
+          rotationSpeed: [0.003, 0.005, 0.002],
+          isGlowing: true,
+        },
+        // Upper-left subtle cube
+        {
+          position: [-0.85, 2.2, -2.2],
+          rotation: [0.8, -0.4, 0.3],
+          scale: [0.8, 0.8, 0.8],
+          speed: 0.6,
+          rotationSpeed: [-0.002, 0.004, 0.003],
+        },
+        // Lower-right glowing accent cube
+        {
+          position: [0.7, -1.4, -1.5],
+          rotation: [-0.3, 0.5, 0.8],
+          scale: [0.95, 0.95, 0.95],
+          speed: 0.9,
+          rotationSpeed: [0.004, -0.003, 0.002],
+          isGlowing: true,
+        },
+        // Lower-left background cube
+        {
+          position: [-0.75, -2.1, -2.4],
+          rotation: [0.2, 0.2, -0.5],
+          scale: [0.75, 0.75, 0.75],
+          speed: 0.5,
+          rotationSpeed: [0.002, 0.002, -0.003],
+        },
+        // Mid-depth center background cube
+        {
+          position: [0.1, -0.2, -3.2],
+          rotation: [-0.5, 0.8, 0.1],
+          scale: [0.7, 0.7, 0.7],
+          speed: 0.7,
+          rotationSpeed: [-0.003, 0.003, 0.001],
+        },
+      ];
+    }
+
+    // Desktop layout: Spacious arrangement in the right half of the screen
     return [
-      // Primary foreground focal cube (center-right)
       {
-        position: [2.6, 0.2, 0.2],
+        position: [2.5, 0.2, 0.2],
         rotation: [0.4, 0.6, 0.2],
         scale: [1.85, 1.85, 1.85],
         speed: 0.8,
         rotationSpeed: [0.003, 0.005, 0.002],
         isGlowing: true,
       },
-      // Upper right cube
       {
-        position: [1.4, 2.0, -0.5],
+        position: [1.3, 2.0, -0.5],
         rotation: [0.8, -0.4, 0.3],
         scale: [1.15, 1.15, 1.15],
         speed: 0.6,
         rotationSpeed: [-0.002, 0.004, 0.003],
       },
-      // Lower right cube
       {
-        position: [3.6, -1.5, -0.3],
+        position: [3.5, -1.5, -0.3],
         rotation: [-0.3, 0.5, 0.8],
         scale: [1.25, 1.25, 1.25],
         speed: 0.9,
         rotationSpeed: [0.004, -0.003, 0.002],
         isGlowing: true,
       },
-      // Midground right cube
       {
-        position: [2.0, -2.2, -1.2],
+        position: [1.9, -2.2, -1.2],
         rotation: [0.2, 0.2, -0.5],
         scale: [1.0, 1.0, 1.0],
         speed: 0.5,
         rotationSpeed: [0.002, 0.002, -0.003],
       },
-      // Far upper right
       {
         position: [3.8, 1.9, -1.5],
         rotation: [-0.5, 0.8, 0.1],
@@ -66,7 +112,6 @@ export const FloatingCubes: React.FC = () => {
         speed: 0.7,
         rotationSpeed: [-0.003, 0.003, 0.001],
       },
-      // Background right atmosphere
       {
         position: [4.4, 0.4, -2.5],
         rotation: [0.6, -0.7, 0.3],
@@ -74,7 +119,6 @@ export const FloatingCubes: React.FC = () => {
         speed: 0.4,
         rotationSpeed: [0.001, 0.003, -0.002],
       },
-      // Distant deep background accent (deep behind, never obstructing text)
       {
         position: [-3.8, 2.6, -4.5],
         rotation: [-0.3, 0.6, -0.4],
@@ -83,34 +127,27 @@ export const FloatingCubes: React.FC = () => {
         rotationSpeed: [-0.002, 0.002, 0.002],
         isGlowing: true,
       },
-      // Distant lower background accent
-      {
-        position: [-4.2, -2.4, -4.5],
-        rotation: [0.4, 0.2, 0.7],
-        scale: [0.55, 0.55, 0.55],
-        speed: 0.35,
-        rotationSpeed: [0.002, -0.002, 0.004],
-      },
     ];
-  }, []);
+  }, [isMobile]);
 
-  // Floating warm ember particles (concentrated toward the right side)
+  // Floating warm ember particles adapted to screen width
   const particles = useMemo(() => {
-    const count = 40;
+    const count = isMobile ? 25 : 40;
     const pos = new Float32Array(count * 3);
+    const spreadX = isMobile ? 3.5 : 9.0;
+    const offsetX = isMobile ? 0 : 2.0;
+
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.2) * 10;
+      pos[i * 3] = (Math.random() - 0.5) * spreadX + offsetX;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 6 - 0.5;
     }
     return pos;
-  }, []);
+  }, [isMobile]);
 
   const boxGeometry = useMemo(() => new THREE.BoxGeometry(1, 1, 1), []);
 
-  // Standard metallic cube material:
-  // In Dark Mode: dark metallic charcoal (#18212B)
-  // In Light Mode: crisp ceramic slate (#CBD5E1) with warm orange reflections
+  // Standard metallic cube material
   const solidCubeMaterial = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
@@ -166,8 +203,8 @@ export const FloatingCubes: React.FC = () => {
     mouse.current.y += (mouse.current.targetY - mouse.current.y) * 0.05;
 
     if (groupRef.current) {
-      groupRef.current.rotation.y = mouse.current.x * 0.2;
-      groupRef.current.rotation.x = -mouse.current.y * 0.15;
+      groupRef.current.rotation.y = mouse.current.x * (isMobile ? 0.1 : 0.2);
+      groupRef.current.rotation.x = -mouse.current.y * (isMobile ? 0.08 : 0.15);
 
       groupRef.current.children.forEach((child, index) => {
         if (child.type === "Mesh" || child.type === "Group") {
